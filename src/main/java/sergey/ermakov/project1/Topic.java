@@ -38,4 +38,8 @@ public class Topic {
     public ArrayList<Comment> getComments() {
         return comments;
     };
+
+    public Date getDate() {
+        return date;
+    };
 }

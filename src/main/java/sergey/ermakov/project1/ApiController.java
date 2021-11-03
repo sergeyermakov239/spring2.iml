@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 @RestController
@@ -112,6 +114,59 @@ public class ApiController {
                 }
             }
         }
+    }
+
+
+
+    //curl -X GET http://localhost:8080/topics/sort/1?sort=up
+    @GetMapping("topics/sort/{index}")
+    public ArrayList<Comment> getSortedComments(@PathVariable("index") Integer index,@RequestParam("sort") String sort){
+        Collections.sort(topics.get(index).getComments(), new Comparator<Comment>() {
+            @Override
+            public int compare(Comment o1, Comment o2) {
+                if (sort.equals("up")){
+                    if (o1.getDate().after(o2.getDate())){
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                } else {
+                    if (o1.getDate().after(o2.getDate())){
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                }
+            }
+        });
+        return topics.get(index).getComments();
+    };
+    //curl -X GET http://localhost:8080/topics/sort?sort=up
+    @GetMapping("topics/sort")
+    public ArrayList<String> getSortedTopics(@RequestParam("sort") String sort){
+        Collections.sort(topics, new Comparator<Topic>() {
+            @Override
+            public int compare(Topic o1, Topic o2) {
+                if (sort.equals("up")){
+                    if (o1.getDate().after(o2.getDate())){
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                } else {
+                    if (o1.getDate().after(o2.getDate())){
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                }
+            }
+        });
+        ArrayList<String> a=new ArrayList<>();
+        for (Topic t:topics){
+            a.add(t.printTopic());
+        };
+        return a;
     }
 
 }
