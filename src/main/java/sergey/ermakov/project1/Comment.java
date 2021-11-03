@@ -1,29 +1,33 @@
 package sergey.ermakov.project1;
 
+import java.util.Date;
+
 public class Comment {
     private String name;
-    private int indexOfTopic;
-    private int indexOfComment;
+    private String user;
+    private Date date;
 
-    public Comment(String name1,int indexOfTopic1,int indexOfComment1){
+
+    public Comment(String name1,String user1){
         name=name1;
-        indexOfTopic=indexOfTopic1;
-        indexOfComment=indexOfComment1;
+        user=user1;
+        date=new Date();
+
     };
 
     public String getName() {
         return name;
     };
 
-    public int getIndexOfComment() {
-        return indexOfComment;
+    public String getUser() {
+        return user;
     };
 
-    public void setIndexOfComment(int indexOfComment) {
-        this.indexOfComment = indexOfComment;
+    public Date getDate() {
+        return date;
     };
 
-    public int getIndexOfTopic() {
-        return indexOfTopic;
+    public void setName(String name) {
+        this.name = name;
     }
 }
